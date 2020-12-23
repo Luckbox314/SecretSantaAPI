@@ -1,53 +1,45 @@
-# Template
+# SecretSantaAPI
 
-Template built with [koa](http://koajs.com/) for IIC2513 - Tecnologías y Aplicaciones Web, Pontificia Universidad Católica de Chile.
+API to play secret santa with your friends. It sends emails to all your friends with their respective secret santa.
 
 ## Prerequisites:
-* PostgreSQL
-  * you will need a database with name and user/password as configured in `src/config/database.js`
 * Node.js LTS (10.x or 12.x)
-* [Yarn](https://yarnpkg.com)
 
 ## Project Setup
 
 * Clone repository
 * Install dependencies:
-  * `yarn install`
-
-## Database Setup (development)
-
-### Install postgresql
-* On Mac OS X using Homebrew: `brew install postgresql`
-  * Start service: check [LaunchRocket](https://github.com/jimbojsb/launchrocket) or [lunchy](https://www.moncefbelyamani.com/how-to-install-postgresql-on-a-mac-with-homebrew-and-lunchy/) for postgresql service management
-* [Other platforms](https://www.postgresql.org/download/)
-
-### Create development database
-
-```sh
-createdb iic2513template_dev
-```
-
-### Run migrations
-```sh
-./node_modules/.bin/sequelize db:migrate
-```
+  * `npm install`
 
 ## Run the app!
 
 ```sh
-yarn start
+npm start
 ```
 
-or directly
+the app will run in http://localhost:3000
 
-```sh
-node index.js
+## Endpoints
+
+* POST /
+this endpoint receives all friends data, shuffles them and then send the respective emails.
+
+Headers:
+```json
+{
+  "Content-Type": "application/json",
+  "Accept": "application/json"
+}
 ```
-
-or, if you want automatic restart after any change in your files
-
-```sh
-yarn dev
+Body:
+```json
+{"users": [
+          {"username": "username1", "email": "email1@email.com"},
+          {"username": "username2", "email": "email2@email.com"},
+          {"username": "username3", "email": "email3@email.com"},
+          {"username": "username4", "email": "email4@email.com"},
+          {"username": "username5", "email": "email5@email.com"},
+          {"username": "username6", "email": "email6@email.com"}
+      ]
+}
 ```
-
-Now go to http://localhost:3000 and start browsing :)
