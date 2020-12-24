@@ -10,7 +10,7 @@
     "lint-fix": "eslint --fix ./src index.js",
     "build-assets": "yarn run clean-assets && NODE_ENV=production webpack -p",
     "clean-assets": "rm -rf build/assets",
-    "heroku-postbuild": "yarn run build-assets && sequelize db:migrate",
+    "heroku-postbuild": "yarn run build-assets",
     "test": "jest"
   },
   "devDependencies": {
@@ -61,7 +61,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
-    "sequelize": "^6.3.5",
     "sequelize-cli": "^6.2.0"
   },
   "engines": {
