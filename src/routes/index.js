@@ -4,6 +4,10 @@ const one_circle = require('../selection_methods/one_circle');
 
 const router = new KoaRouter();
 
+const methods = {
+  one_circle: one_circle
+}
+
 function sendEmail(mail, message){
   console.log("Email enviado", mail, message);
 }
@@ -26,10 +30,16 @@ router.get('/', async (ctx) => {
 // ]
 
 router.post('/', async (ctx) => {
-  const { users }= ctx.request.body;
-  const result = one_circle(users);
-  sendEmails(result);
-  ctx.body = {"success": true, result: result};
+  let { users, method }= ctx.request.body;
+  if (!method) {method = 'one_circle'}
+  try {
+    const result = methods[method](users);
+    sendEmails(result);
+    ctx.body = {"success": true, result: result};
+  } catch (error) {
+    ctx.body = {"success": false};
+  }
+
 });
 
 module.exports = router;
