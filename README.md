@@ -2,6 +2,8 @@
 
 API to play secret santa with your friends. It sends emails to all your friends with their respective secret santa.
 
+It's deployed on Heroku in https://amigo-secreto-api.herokuapp.com/.
+
 ## Prerequisites:
 * Node.js LTS (10.x or 12.x)
 
