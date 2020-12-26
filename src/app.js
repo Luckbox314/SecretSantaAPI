@@ -10,6 +10,7 @@ const override = require('koa-override-method');
 const assets = require('./assets');
 const mailer = require('./mailers');
 const routes = require('./routes');
+require('dotenv').config();
 
 // App constructor
 const app = new Koa();

@@ -1,19 +1,17 @@
 const KoaRouter = require('koa-router');
 const pkg = require('../../package.json');
+const sendSecretEmail = require("../mailers/secret")
 const one_circle = require('../selection_methods/one_circle');
+
 
 const router = new KoaRouter();
 
 const methods = {
   one_circle: one_circle
 }
-
-function sendEmail(mail, message){
-  console.log("Email enviado", mail, message);
-}
-function sendEmails(result) {
+function sendEmails(result, ctx) {
   result.forEach((pair) => {
-    sendEmail(pair.sender.email, pair.receiver.username);
+    sendSecretEmail(ctx, pair.sender.email, pair.receiver.username);
   })
 }
 
@@ -34,7 +32,7 @@ router.post('/', async (ctx) => {
   if (!method) {method = 'one_circle'}
   try {
     const result = methods[method](users);
-    sendEmails(result);
+    sendEmails(result, ctx);
     ctx.body = {"success": true, result: result};
   } catch (error) {
     ctx.body = {"success": false};

@@ -1,5 +1,5 @@
 const KoaRouter = require('koa-router');
-const sendExampleEmail = require('../mailers/example');
+const sendExampleEmail = require('../mailers/secret');
 
 const router = new KoaRouter();
 
